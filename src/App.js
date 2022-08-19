@@ -30,6 +30,7 @@ function App() {
   return (
     <div className="container">
       <Header />
+      {/* Now tasks is a prop in our Task component! */}
       <Tasks tasks={tasks} />
     </div>
   );
