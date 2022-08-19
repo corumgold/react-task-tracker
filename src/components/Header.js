@@ -5,10 +5,14 @@ import Button from "./Button";
 
 //props brings in properties from App.js
 const Header = (props) => {
+  const onClick = () => {
+    console.log("Click!");
+  };
+
   return (
     <header className="header">
       <h1>{props.title}</h1>
-      <Button color='green' text='Hello' />
+      <Button color="green" text="Add" onClick={onClick} />
     </header>
   );
 };
