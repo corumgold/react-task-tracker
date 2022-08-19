@@ -2,6 +2,8 @@ import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import React from "react";
 
+//**STATE GETS PASSED DOWN, ACTIONS GET PASSED UP
+
 function App() {
   //we want to 'use state' with these tasks
   //state is immutable, so we need to use setTasks to change
@@ -27,11 +29,31 @@ function App() {
     },
   ]);
 
+  //DELETE TASK FUNC
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  //TOGGLE REMINDER
+  const toggleReminder = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        //if the id matches, change the reminder!
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    );
+  };
+
   return (
     <div className="container">
       <Header />
       {/* Now tasks is a prop in our Task component! */}
-      <Tasks tasks={tasks} />
+      {/* If there are no tasks, show 'no tasks' */}
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+      ) : (
+        "No Tasks"
+      )}
     </div>
   );
 }
